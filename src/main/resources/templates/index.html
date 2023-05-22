@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="당신을 위한 복지, 여행 ALL THAT TOUR">
+	<meta name="image" property="og:image" content="http://allthattour.kr/img/bg.jpg">
+	<meta name="title" property="og:title" content="ALL THAT TOUR" />
+	<meta name="description" property="og:description" content="당신을 위한 복지, 여행 ALL THAT TOUR " />
+	<meta name="url" property="og:url" content="http://allthattour.kr" />
+	<title>ALL THAT TOUR</title>
+
+	<!-- Favicons-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+	<link rel="manifest" href="/img/site.webmanifest">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- GOOGLE WEB FONT -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+		rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+
+	<!-- BASE CSS -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/vendors.css" rel="stylesheet">
+
+	<!-- YOUR CUSTOM CSS -->
+	<link href="/css/custom.css" rel="stylesheet">
+
+</head>
+
+<body class="datepicker_mobile_full">
+
+	<div id="page">
+
+		<header class="header menu_fixed">
+			<div id="preloader">
+				<div data-loader="circle-side"></div>
+			</div><!-- /Page Preload -->
+			<div id="logo">
+				<a href="/">
+					<img src="img/logo.svg" width="150" height="28" alt="" class="logo_normal">
+					<img src="img/logo_sticky.svg" width="150" height="28" alt="" class="logo_sticky">
+				</a>
+			</div>
+
+			<ul id="top_menu" th:if="${name == ''}">
+				<li><a href="cart" class="cart-menu-btn" title="Cart"><strong></strong></a></li>
+				<li><a href="login" id="sign-in" class="login" title="Sign In">Sign In</a></li>
+				<li><a href="wishlist" class="wishlist_bt_top" title="Your wishlist">Your wishlist</a></li>
+			</ul>
+			<ul id="top_menu" th:if="${name != ''}">
+				<li><a href="cart" class="cart-menu-btn" title="Cart"><strong></strong></a></li>
+				<li><a href="wishlist" class="wishlist_bt_top" title="Your wishlist">Your wishlist</a></li>
+			</ul>
+
+			<a href="#menu" class="btn_mobile">
+				<div class="hamburger hamburger--spin" id="hamburger">
+					<div class="hamburger-box">
+						<div class="hamburger-inner"></div>
+					</div>
+				</div>
+			</a>
+			<nav id="menu" class="main-menu">
+				<ul th:if="${name == ''}">
+					<li><span><a href="/">홈</a></span></li>
+					<li><span><a href="/help">고객센터</a></span></li>
+					<li><span><a href="/cart">장바구니</a></span></li>
+					<li><span><a href="/signup">회원가입</a></span></li>
+					<li><span><a href="/login">로그인</a></span></li>
+				</ul>
+				<ul th:if="${name != ''}">
+					<li><span><a href="/">홈</a></span></li>
+					<li><span><a href="/help">고객센터</a></span></li>
+					<li><span><a href="/cart">장바구니</a></span></li>
+					<li><span><a href="/mypage" th:text="${name}"></a></span></li>
+				</ul>
+			</nav>
+		</header>
+		<!-- /header -->
+
+		<main>
+			<section class="hero_single version_2">
+				<div class="wrapper">
+					<div class="container">
+						<h3>어디로 여행 가시나요?</h3>
+						<form>
+							<div class="row g-0 custom-search-input-2">
+								<div class="col-lg-3">
+									<div class="form-group">
+										<input class="form-control" type="text" id="place" placeholder="어디로 떠나시나요?">
+										<i class="icon_pin_alt"></i>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<input type="hidden" id="room" value="1">
+									<input type="hidden" id="start_date">
+									<input type="hidden" id="end_date">
+									<div class="form-group">
+										<input class="form-control" type="text" name="dates" placeholder="언제 떠나시나요?">
+										<i class="icon_calendar"></i>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="panel-dropdown">
+										<a id="guests" href="#">누구와 떠나나요? <span class="qtyTotal"
+												style="display: none;">1</span></a>
+										<div class="panel-dropdown-content">
+											<!-- Quantity Buttons -->
+											<div class="qtyButtons">
+												<label>성인</label>
+												<input type="text" name="qtyInput" id="adult" value="1">
+											</div>
+											<div class="qtyButtons">
+												<label>아동</label>
+												<input type="text" name="qtyInput" id="child" value="0">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-1">
+									<a href="/map"><img src="/img/map.jpg"></a>
+								</div>
+								<div class="col-lg-2">
+									<input type="submit" id="search-btn" class="btn_search" value="검색">
+								</div>
+							</div>
+							<!-- /row -->
+						</form>
+					</div>
+				</div>
+			</section>
+			<!-- /hero_single -->
+
+			<div class="container container-custom margin_30_95">
+				<section class="add_bottom_45">
+					<div class="main_title_3">
+						<h2>추천 여행지</h2>
+					</div>
+				</section>
+				<!-- /section -->
+				<div id="reccomended" class="owl-carousel owl-theme owl-loaded owl-drag">
+					<div class="owl-stage-outer">
+						<div class="owl-stage"
+							style="transition: all 0.25s ease 0s; width: 5180px; transform: translate3d(-2035px, 0px, 0px);"
+							id="weathers">
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /container -->
+		</main>
+		<!-- /main -->
+
+		<footer>
+			<div class="container margin_60_35">
+
+				<div class="row">
+					<div class="col-lg-5 col-md-12 pe-5">
+						<p><img src="img/logo.jpg" width="150" height="36" alt=""></p>
+						<p>너무 좋습니다. 너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무
+							좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무 좋습니다.너무</p>
+						<div class="follow_us">
+							<ul>
+								<li>Follow us</li>
+								<li><a href="#0"><i class="ti-facebook"></i></a></li>
+								<li><a href="#0"><i class="ti-twitter-alt"></i></a></li>
+								<li><a href="#0"><i class="ti-google"></i></a></li>
+								<li><a href="#0"><i class="ti-pinterest"></i></a></li>
+								<li><a href="#0"><i class="ti-instagram"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 ms-lg-auto">
+						<h5>바로가기</h5>
+						<ul class="links">
+							<li><a href="/">HOME</a></li>
+							<li><a href="notice">공지사항</a></li>
+							<li><a href="help">고객센터</a></li>
+							<li><a href="cart">장바구니</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<h5>고객센터</h5>
+						<ul class="contacts">
+							<li><a href="tel://15880155"><i class="ti-mobile"></i> + 1588-0155</a></li>
+							<li><a href="mailto:tuflex@tuflex.kr"><i class="ti-email"></i> tuflex@tuflex.kr</a></li>
+						</ul>
+						<div id="newsletter">
+							상담시간: 10:00 ~ 16:00 (토, 일, 공휴일 휴무)
+						</div>
+					</div>
+				</div>
+		</footer>
+		<!--/footer-->
+	</div>
+	<!-- page -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+
+	<!-- COMMON SCRIPTS -->
+	<script src="/js/common_scripts.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="phpmailer/validate.js"></script>
+
+	<!-- DATEPICKER  -->
+	<script>
+		$(function () {
+			'use strict';
+			$('input[name="dates"]').daterangepicker({
+				autoUpdateInput: false,
+				minDate: new Date(),
+				locale: {
+					cancelLabel: '초기화',
+					applyLabel: '적용'
+				}
+			}, function (start, end, label) {
+				$('#start_date').val(start);
+				$('#end_date').val(end);
+			});
+			$('input[name="dates"]').on('apply.daterangepicker', function (ev, picker) {
+				$('#start_date').val(picker.startDate.format('YYYY-MM-DD'));
+				$('#end_date').val(picker.endDate.format('YYYY-MM-DD'));
+			});
+			$('input[name="dates"]').on('apply.daterangepicker', function (ev, picker) {
+				$(this).val(picker.startDate.format('YYYY-MM-DD') + ' ~ ' + picker.endDate.format('YYYY-MM-DD'));
+			});
+			$('input[name="dates"]').on('cancel.daterangepicker', function (ev, picker) {
+				$(this).val('');
+				$('#start_date').val('');
+				$('#end_date').val('');
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(function () {
+			$(document).on('click', '.btn-login', function () {
+				location.href = 'login';
+			}).on('click', '#search-btn', function (e) {
+				e.preventDefault();
+				if ($('#place').val() == '') {
+					alert('장소를 입력하세요')
+				} else if ($('#start_date').val() == '') {
+					alert('체크인 날짜와 체크아웃 날짜를 선택하세요')
+				} else if ($('#a').val() == '0') {
+					alert('최소 한 명의 성인이 있어야 합니다.')
+				} else {
+					location.href = "search?k=" + $('#place').val() + '&s=' + $('#start_date').val() + '&e=' + $('#end_date').val() + '&r=' + $('#room').val() + '&a=' + $('#adult').val() + '&c=' + $('#child').val()
+				}
+			})
+			function fetchWeather() {
+				$.ajax({
+					url: "/api/common/weather.do", type: 'GET',
+					success: function (data) {
+						$('#weathers').empty();
+						console.log(data);
+						var weathers = data['weatherList'];
+						console.log(weathers);
+						weathers.forEach(w => {
+							console.log(w);
+							console.log(w['type'])
+							$('#weathers').append('<div class="owl-item" style="width: 370px;">' +
+								'	<div class="item">' +
+								'		<div class="box_grid">' +
+								'			<div class="wrapper">' +
+								'				<h3>' + w['type'] + '</h3>' +
+								'				<p>' + w['datetime'] + '</p>' +
+								'			</div>' +
+								'			<ul>' +
+								'				<li style="float: none;"><i class="icon_location"></i>' + w['location'] + '</li>' +
+								'			</ul>' +
+								'		</div>' +
+								'	</div>' +
+								'</div>');
+						});
+					},
+					error: function (xhr, status, error) {
+						console.log(error)
+					}
+				});
+			}
+			fetchWeather();
+			var timerID = setInterval(fetchWeather, 60 * 1000 * 5);
+
+			// clearInterval(timerID);
+
+		});
+	</script>
+
+	<!-- INPUT QUANTITY  -->
+	<script src="/js/input_qty.js"></script>
+
+</body>
+
+</html>

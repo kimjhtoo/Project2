@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="당신을 위한 복지, 여행 ALL THAT TOUR">
+	<meta name="image" property="og:image" content="http://allthattour.kr/img/bg.jpg">
+	<meta name="title" property="og:title" content="ALL THAT TOUR" />
+	<meta name="description" property="og:description" content="당신을 위한 복지, 여행 ALL THAT TOUR " />
+	<meta name="url" property="og:url" content="http://allthattour.kr" />
+	<title>ALL THAT TOUR</title>
+
+	<!-- Favicons-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+	<link rel="manifest" href="/img/site.webmanifest">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- GOOGLE WEB FONT -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+		rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+
+	<!-- BASE CSS -->
+	<link href="/css/bootstrap-rtl.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/vendors.css" rel="stylesheet">
+
+	<!-- YOUR CUSTOM CSS -->
+	<link href="/css/custom.css" rel="stylesheet">
+
+</head>
+
+<body id="register_bg">
+
+	<nav id="menu" class="fake_menu"></nav>
+
+	<div id="preloader">
+		<div data-loader="circle-side"></div>
+	</div>
+	<!-- End Preload -->
+
+	<div id="login">
+		<aside style="background: rgba(255, 255, 255, 0.8);">
+			<figure>
+				<a href="/" class="logo-text" style="place-content: center;"><img src="/img/logo.jpg"></a>
+			</figure>
+			<form autocomplete="off">
+				<div class="form-group">
+					<label>영문</label>
+					<input class="form-control" type="text" id="name">
+					<i class="ti-user"></i>
+				</div>
+				<div class="form-group">
+					<label>이메일</label>
+					<input class="form-control" type="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>비밀번호</label>
+					<input class="form-control" type="password" id="passwd">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>비밀번호확인</label>
+					<input class="form-control" type="password" id="passwdRe">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div id="pass-info" class="clearfix"></div>
+				<div class="clearfix add_bottom_30">
+					<div class="checkboxes float-end">
+						<label class="container_check"><b>다음의 모든 항목에 동의합니다.</b>
+							<input type="checkbox" id="agreement_all">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="checkboxes float-end">
+						<label class="container_check">본인은 본 서비스 약관에 동의하며 18세 이상임을 확인합니다. [필수] (링크)
+							<input type="checkbox" id="agreement_1">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="checkboxes float-end">
+						<label class="container_check">본인은 개인정보 처리방침에 따라 본인의 개인정보를 사용하고 수집하는 것에
+							동의합니다. [필수]
+							<input type="checkbox" id="agreement_2">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="checkboxes float-end">
+						<label class="container_check">본인은 개인정보 처리방침에 따라 대한민국 또는 해외에 있는 제 3자에 본인의
+							개인정보를 제공하는 것에 동의합니다. [필수] (링크)
+							<input type="checkbox" id="agreement_3">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+				<a href="javascript:signup()" class="btn_1 rounded full-width add_top_30">회원가입</a>
+			</form>
+		</aside>
+	</div>
+	<!-- /login -->
+
+	<!-- COMMON SCRIPTS -->
+	<script src="/js/jquery-2.2.4.min.js"></script>
+	<script src="/js/common_scripts.js"></script>
+	<script src="/js/main_rtl.js"></script>
+	<script src="phpmailer/validate.js"></script>
+
+	<!-- SPECIFIC SCRIPTS -->
+	<script src="/js/pw_strenght.js"></script>
+
+	<script>
+		$(document).on('click', '#agreement_all', function () {
+			if ($(this).is(':checked')) {
+				$(this).prop('checked', true);
+				$('#agreement_1,#agreement_2,#agreement_3').prop('checked', true);
+			} else {
+				$(this).prop('checked', false);
+				$('#agreement_1,#agreement_2,#agreement_3').prop('checked', false);
+			}
+		}).on('click', '#agreement_1,#agreement_2,#agreement_3', function () {
+			if ($(this).is(':checked')) {
+				$(this).prop('checked', true);
+			} else {
+				$(this).prop('checked', false);
+			}
+			if ($('#agreement_1').is(':checked') && $('#agreement_2').is(':checked') && $('#agreement_3').is(':checked')) {
+				$('#agreement_all').prop('checked', true);
+			} else {
+				$('#agreement_all').prop('checked', false);
+			}
+		})
+		function signup() {
+			if ($('#name').val() == '') {
+				alert('이름을 입력하세요')
+			} else if ($('#email').val() == '') {
+				alert('이메일을 입력하세요')
+			} else if ($('#passwd').val() == '') {
+				alert('비밀번호를 입력하세요')
+			} else if ($('#passwd').val() != $('#passwdRe').val()) {
+				alert('비밀번호가 일치하지 않습니다')
+			} else if (!$('#agreement_all').is(':checked')) {
+				alert('동의 항목을 체크 해주세요');
+			} else {
+				var data = JSON.stringify({name: $('#name').val(), email: $('#email').val(), passwd: $('#passwd').val()});
+				$.ajax({
+					url: "/api/user/register.do", type: 'POST', data: data,
+					contentType: "application/json;charset=UTF-8",
+					complete: function (e, xhr, settings) {
+						if (e.status == 200) {
+							location.replace('index')
+						} else {
+							alert('이미 사용 중인 이메일입니다.');
+						}
+					}
+				});
+			}
+		}
+	</script>
+
+</body>
+
+</html>

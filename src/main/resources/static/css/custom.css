@@ -1,0 +1,31 @@
+/*============================================================================================*/
+/* Your custom styles below */
+/*============================================================================================*/
+
+
+
+.logo-text {
+    font-family: 'Oleo Script', cursive;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.irs-slider,
+.irs-to,
+.irs-from,
+.irs-bar {
+    background: #B015FD;
+}
+
+.tag {
+    background: #702AF3;
+    color: #fff;
+    border-radius: 12px;
+    align-items: center;
+    padding: 2px 8px;
+}

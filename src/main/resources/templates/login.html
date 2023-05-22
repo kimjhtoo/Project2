@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="당신을 위한 복지, 여행 ALL THAT TOUR">
+	<meta name="image" property="og:image" content="http://allthattour.kr/img/bg.jpg">
+	<meta name="title" property="og:title" content="ALL THAT TOUR" />
+	<meta name="description" property="og:description" content="당신을 위한 복지, 여행 ALL THAT TOUR " />
+	<meta name="url" property="og:url" content="http://allthattour.kr" />
+	<title>ALL THAT TOUR</title>
+
+	<!-- Favicons-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+	<link rel="manifest" href="/img/site.webmanifest">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- GOOGLE WEB FONT -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+		rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+
+	<!-- BASE CSS -->
+	<link href="/css/bootstrap-rtl.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/vendors.css" rel="stylesheet">
+
+	<!-- YOUR CUSTOM CSS -->
+	<link href="/css/custom.css" rel="stylesheet">
+
+</head>
+
+<body id="login_bg">
+
+	<nav id="menu" class="fake_menu"></nav>
+
+	<div id="preloader">
+		<div data-loader="circle-side"></div>
+	</div>
+	<!-- End Preload -->
+
+	<div id="login">
+		<aside style="background: rgba(255, 255, 255, 0.8);">
+			<figure>
+				<a href="/" class="logo-text" style="place-content: center;"><img src="/img/logo.jpg"></a>
+			</figure>
+			<form id="frm" action="/user/login" method="post">
+				<div class="access_social">
+					<a href="javascript:kakaoLogin();" class="social_bt kakao">카카오로 로그인</a>
+				</div>
+				<div class="divider"><span>Or</span></div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="passwd" id="passwd" value="">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="clearfix add_bottom_30">
+					<div class="float-start mt-1"><a id="forgot" href="javascript:void(0);">비밀번호를 잊으셨나요?</a></div>
+					<div class="checkboxes float-end">
+						<label class="container_check">자동로그인
+							<input type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix add_bottom_15">
+				</div>
+				<a href="javascript:login()" class="btn_1 rounded full-width ">로그인하기</a>
+				<div class="clearfix add_bottom_15">
+				</div>
+				<div class="text-center add_top_10">아직 회원이 아니신가요? <strong><a href="signup">회원가입하기</a></strong>
+				</div>
+			</form>
+		</aside>
+	</div>
+	<!-- /login -->
+
+	<!-- COMMON SCRIPTS -->
+	<script src="/js/jquery-2.2.4.min.js"></script>
+	<script src="/js/common_scripts.js"></script>
+	<script src="/js/main_rtl.js"></script>
+	<script src="phpmailer/validate.js"></script>
+	<script>
+		function login() {
+			$('#frm').submit();
+		}
+	</script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+		Kakao.init('ebc6b24e32ddea45c807273844256d80'); //발급받은 키 중 javascript키를 사용해준다.
+		console.log(Kakao.isInitialized()); // sdk초기화여부판단
+		//카카오로그인
+		function kakaoLogin() {
+			Kakao.Auth.login({
+				success: function (response) {
+					Kakao.API.request({
+						url: '/v2/user/me',
+						success: function (response) {
+							location.href = "signup?id=" + response['id'] + '&t=kakao';
+						},
+						fail: function (error) {
+							console.log(error)
+						},
+					})
+				},
+				fail: function (error) {
+					console.log(error)
+				},
+			})
+		}
+	</script>
+</body>
+
+</html>

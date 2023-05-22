@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="당신을 위한 복지, 여행 ALL THAT TOUR">
+	<meta name="image" property="og:image" content="http://allthattour.kr/img/bg.jpg">
+	<meta name="title" property="og:title" content="ALL THAT TOUR" />
+	<meta name="description" property="og:description" content="당신을 위한 복지, 여행 ALL THAT TOUR " />
+	<meta name="url" property="og:url" content="http://allthattour.kr" />
+	<title>ALL THAT TOUR</title>
+
+	<link rel="stylesheet" href="ion-rangeslider/css/ion.rangeSlider.min.css">
+	<link rel="stylesheet" href="bootstrap-slider/css/bootstrap-slider.min.css">
+
+	<!-- GOOGLE WEB FONT -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+		rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+	<!-- BASE CSS -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/vendors.css" rel="stylesheet">
+
+	<!-- YOUR CUSTOM CSS -->
+	<link href="/css/custom.css" rel="stylesheet">
+
+	<link href="/js/modernizr_slider.js" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div id="page">
+
+		<header class="search-header">
+			<div id="preloader" style="display: none;">
+				<div data-loader="circle-side" style="display: none;"></div>
+			</div><!-- /Page Preload -->
+			<div id="logo" class="logo-text">ALL THAT TOUR</div>
+			<!-- /top_menu -->
+			<a href="#menu" class="btn_mobile">
+				<div class="hamburger hamburger--spin" id="hamburger">
+					<div class="hamburger-box">
+						<div class="hamburger-inner"></div>
+					</div>
+				</div>
+			</a>
+			<nav id="menu" class="main-menu">
+				<ul th:if="${name == ''}">
+					<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></li>
+				</ul>
+				<ul th:unless="${name == ''}">
+					<li><a href="cart-1.html" class="cart-menu-btn" title="Cart"><strong>4</strong></a></li>
+				</ul>
+			</nav>
+		</header>
+		<!-- /header -->
+
+		<main>
+			<div class="search_container" style="margin-top: 243px;">
+				<div class="container">
+					<div class="col-lg-12">
+						<div class="row g-0 custom-search-input-2 inner">
+							<div class="col-lg-4">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="어디로 떠나시나요?"
+										th:value="${place}">
+									<i class="icon_search"></i>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<div class="form-group">
+									<input class="form-control" type="text" id="start_date" placeholder="체크인"
+										th:value="${startDate}">
+									<i class="icon_pin_alt"></i>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<div class="form-group">
+									<input class="form-control" type="text" id="end_date" placeholder="체크아웃"
+										th:value="${endDate}">
+									<i class="icon_pin_alt"></i>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<div class="panel-dropdown form-group">
+									<a href="#">인원 수 <span class="qtyTotal" style="display: none;">1</span></a>
+									<div class="panel-dropdown-content">
+										<!-- Quantity Buttons -->
+										<div class="qtyButtons">
+											<label>객실</label>
+											<input type="text" name="qtyInput" th:value="${room}">
+										</div>
+										<div class="qtyButtons">
+											<label class="quantity-label-main">성인 <font class="quantity-label-sub">19세
+													이상</font></label>
+											<input type="text" name="qtyInput" th:value="${adult}">
+										</div>
+										<div class="qtyButtons">
+											<label class="quantity-label-main">아동 <font class="quantity-label-sub">0-17세
+												</font></label>
+											<input type="text" name="qtyInput" th:value="${child}">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<input type="submit" class="btn_search" value="Search">
+							</div>
+						</div>
+						<!-- /row -->
+					</div>
+					<!-- /custom-search-input-2 -->
+				</div>
+			</div>
+			<!-- /search_container -->
+			<div class="container" style="margin-top: 90px;">
+				<div class="row">
+					<div class="col-4 search-filter">
+						<div class="search-filter-title">필터</div>
+						<div style="margin-top: 32px;">
+							<div class="row">
+								<div class="col-6">
+									<div class="search-filter-subtitle">가격</div>
+								</div>
+								<div class="col-6" align="right">
+									<img src="img/up.png" class="filter-btn" data-target="price-div">
+								</div>
+							</div>
+							<div id="price-div">
+								<div class="slider-red" style="margin-top: 16px;">
+									<input type="text" value="" class="slider form-control" style="width: 100%;"
+										data-slider-min="10000" data-slider-max="2000000" data-slider-step="1000"
+										data-slider-value="[10000,2000000]" data-slider-orientation="horizontal"
+										data-slider-selection="before" data-slider-tooltip="hide">
+								</div>
+								<div class="row">
+									<div class="col-6">
+										<div id="min_price">10000</div>
+									</div>
+									<div class="col-6" align="right">
+										<div id="max_price">2000000</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="search-filter-divider"> </div>
+						<div class="row">
+							<div class="col-6">
+								<div class="search-filter-subtitle">숙소 평점</div>
+							</div>
+							<div class="col-6" align="right">
+								<img src="img/up.png" class="filter-btn" data-target="rating-div">
+							</div>
+						</div>
+						<div class="row" style="margin-top: 16px;" id="rating-div">
+							<div class="search-filter-rating"><label>1+</label></div>
+							<div class="search-filter-rating"><label>3+</label></div>
+							<div class="search-filter-rating"><label>5+</label></div>
+							<div class="search-filter-rating"><label>7+</label></div>
+							<div class="search-filter-rating"><label>9+</label></div>
+						</div>
+						<div class="row" style="margin-top: 32px;">
+							<div class="col-6">
+								<div class="search-filter-subtitle">숙소 성급</div>
+							</div>
+							<div class="col-6" align="right">
+								<img src="img/up.png" class="filter-btn" data-target="star-div">
+							</div>
+						</div>
+						<div style="margin-top: 16px;" id="star-div">
+							<div class="row">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="rating5"> <img src="img/star1.png" class="search-filter-rating-img"><img
+									src="img/star1.png" class="search-filter-rating-img"><img src="img/star1.png"
+									class="search-filter-rating-img"><img src="img/star1.png"
+									class="search-filter-rating-img"><img src="img/star1.png"
+									class="search-filter-rating-img">
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="rating4"> <img src="img/star1.png" class="search-filter-rating-img"><img
+									src="img/star1.png" class="search-filter-rating-img"><img src="img/star1.png"
+									class="search-filter-rating-img"><img src="img/star1.png"
+									class="search-filter-rating-img">
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="rating3"> <img src="img/star1.png" class="search-filter-rating-img"><img
+									src="img/star1.png" class="search-filter-rating-img"><img src="img/star1.png"
+									class="search-filter-rating-img">
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="rating2"> <img src="img/star1.png" class="search-filter-rating-img"><img
+									src="img/star1.png" class="search-filter-rating-img">
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="rating1"> <img src="img/star1.png" class="search-filter-rating-img">
+							</div>
+						</div>
+						<div class="row" style="margin-top: 32px;">
+							<div class="col-6">
+								<div class="search-filter-subtitle">숙소 종류</div>
+							</div>
+							<div class="col-6" align="right">
+								<img src="img/up.png" class="filter-btn" data-target="type-div">
+							</div>
+						</div>
+						<div style="margin-top: 16px;" id="type-div">
+							<div class="row">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="hotel">
+								<div class="search-filter-checkbox-label">호텔</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="resort">
+								<div class="search-filter-checkbox-label">리조트</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="guesthouse">
+								<div class="search-filter-checkbox-label">게스트 하우스</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="motel">
+								<div class="search-filter-checkbox-label">모텔</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="apartment">
+								<div class="search-filter-checkbox-label">아파트</div>
+							</div>
+						</div>
+						<div class="search-filter-divider2"> </div>
+						<div class="row" style="margin-top: 32px;">
+							<div class="col-6">
+								<div class="search-filter-subtitle">침대 종류</div>
+							</div>
+							<div class="col-6" align="right">
+								<img src="img/up.png" class="filter-btn" data-target="bed-div">
+							</div>
+						</div>
+						<div style="margin-top: 16px;" id="bed-div">
+							<div class="row">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="singletwin">
+								<div class="search-filter-checkbox-label">싱글/트윈 베드</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="double">
+								<div class="search-filter-checkbox-label">더블 베드</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="queen">
+								<div class="search-filter-checkbox-label">퀸베드</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="king">
+								<div class="search-filter-checkbox-label">킹 베드</div>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 22px;">
+							<div class="col-6">
+								<div class="search-filter-subtitle">편의 시설</div>
+							</div>
+							<div class="col-6" align="right">
+								<img src="img/up.png" class="filter-btn" data-target="convenient-div">
+							</div>
+						</div>
+						<div style="margin-top: 16px;" id="convenient-div">
+							<div class="row">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="난방">
+								<div class="search-filter-checkbox-label">난방</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="TV">
+								<div class="search-filter-checkbox-label">tv</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="냉장고">
+								<div class="search-filter-checkbox-label">냉장고</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="세탁기">
+								<div class="search-filter-checkbox-label">세탁기</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="욕조">
+								<div class="search-filter-checkbox-label">욕조</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="인터넷">
+								<div class="search-filter-checkbox-label">인터넷</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="에어컨">
+								<div class="search-filter-checkbox-label">에어컨</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="발코니/테라스">
+								<div class="search-filter-checkbox-label">발코니/테라스</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="반려동물 동반">
+								<div class="search-filter-checkbox-label">반려동물 동반</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="수영장">
+								<div class="search-filter-checkbox-label">수영장</div>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 32px;">
+							<div class="col-6">
+								<div class="search-filter-subtitle">이용가능 서비스</div>
+							</div>
+							<div class="col-6" align="right">
+								<img src="img/up.png" class="filter-btn" data-target="service-div">
+							</div>
+						</div>
+						<div style="margin-top: 16px;" id="service-div">
+							<div class="row">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="조식 포함">
+								<div class="search-filter-checkbox-label">조식 포함</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="레이트 체크 아웃">
+								<div class="search-filter-checkbox-label">레이트 체크 아웃</div>
+							</div>
+							<div class="row" style="margin-top: 8px">
+								<img class="search-filter-checkbox" src="img/check_off2.png" data-status="off"
+									data-name="얼리 체크인">
+								<div class="search-filter-checkbox-label">얼리 체크인</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<div class="col-12">
+							<div class="row search-sort-text" style="flex-wrap: nowrap;">
+								<div class="col-4 sort" data-target="sort1-div">평점 높은 순</div>
+								<div class="col-4 sort" data-target="sort2-div">낮은 요금 순</div>
+								<div class="col-4 sort" data-target="sort3-div">추천순</div>
+							</div>
+							<div class="row search-sort-bottom" style="flex-wrap: nowrap;">
+								<div class="col-4" style="text-align: -webkit-center;">
+									<div class="active" id="sort1-div"> </div>
+								</div>
+								<div class="col-4" style="text-align: -webkit-center;">
+									<div id="sort2-div"> </div>
+								</div>
+								<div class="col-4" style="text-align: -webkit-center;">
+									<div id="sort3-div"> </div>
+								</div>
+							</div>
+						</div>
+						<div class="search-count" th:text="${hotels.size()} + '개의 숙소'"></div>
+						<div class="isotope-wrapper" style="position: relative;">
+							<th:block th:each="hotel, iterator : ${hotels}">
+								<div class="box_list isotope-item latest"
+									style="position: absolute; left: 0px; top: 0px;">
+									<div class="row g-0" style="flex-wrap: nowrap;">
+										<div class="search-image">
+											<a th:href="'hotel-detail/' + ${hotel.getHotelId()}"><img
+													th:src="${hotel.getPhotoUrl()}" class="search-image img-fluid"
+													alt="">
+											</a>
+										</div>
+										<div style="width: 540px; height: 302.5px">
+											<div class="wrapper">
+												<div class="row" style="flex-wrap: nowrap;">
+													<div style="width: 352px;">
+														<h3><a th:href="'hotel-detail/' + ${hotel.getHotelId()}" class="
+																search-name" th:text="${hotel.getName()}"></a>
+														</h3>
+														<div class="row" style="flex-wrap: nowrap; margin-top: 16px;">
+															<img src="img/pin.png"
+																style="width: 16px; height: 16px; padding: 0;">
+															<div class="search-address" th:text="${hotel.getAddress()}">
+															</div>
+														</div>
+														<div class="row" style="flex-wrap: nowrap; margin-top: 12px;">
+															<th:block
+																th:each="i: ${#numbers.sequence(0, hotel.star - 1)}">
+																<img src="img/star1.png"
+																	class="search-filter-rating-img">
+															</th:block>
+															<div class="search-text"
+																th:text="${hotel.getStar()} + ' Star Hotel'"></div>
+															<img src="img/aminity.png"
+																style="width: 16px; height: 16px; padding: 0; margin-left: 32px;">
+															<div class="search-bold" 0
+																th:text="${hotel.getAminityCount()} + '+'">
+															</div>
+															<div class="search-text"> Aminities</div>
+														</div>
+														<div class="row" style="flex-wrap: nowrap; margin-top: 12px;">
+															<div class="search-rate" th:text="${hotel.getRate()}"></div>
+															<div class="search-text" th:text="${hotel.getRateStr()}"
+																style="margin-top: 8.5px;">
+															</div>
+															<div class="search-text"
+																th:text="'리뷰 ' + ${hotel.getReviewCount()}"
+																style="margin-top: 8.5px;"></div>
+														</div>
+													</div>
+													<div style=" width: 130px; margin-left: 30px;">
+														<div class="search-starting-from">starting from</div>
+														<div class="search-price" th:text="'w'+${hotel.getPrice()}">
+														</div>
+														<div class="search-price2">excl. tax</div>
+													</div>
+												</div>
+											</div>
+											<div class="row" style="flex-wrap: nowrap;">
+												<div style="width: 540px;">
+													<img src="img/cart.png"
+														style="width: 48px; height: 48px; margin-left: 20px;">
+													<button class="search-reserve btn">예약하기</button>
+												</div>
+											</div>
+										</div>
+									</div>
+							</th:block>
+							<!-- /box_list -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /container -->
+		</main>
+		<!-- /main -->
+	</div>
+	<!-- page -->
+
+	<!-- Sign In Popup -->
+	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="small-dialog-header">
+			<h3>Sign In</h3>
+		</div>
+		<form>
+			<div class="sign-in-wrapper">
+				<a href="#0" class="social_bt facebook">Login with Facebook</a>
+				<a href="#0" class="social_bt google">Login with Google</a>
+				<div class="divider"><span>Or</span></div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="password" id="password" value="">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="clearfix add_bottom_15">
+					<div class="checkboxes float-start">
+						<label class="container_check">Remember me
+							<input type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+					<div class="float-end mt-1"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+				</div>
+				<div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width"></div>
+				<div class="text-center">
+					Don’t have an account? <a href="register.html">Sign up</a>
+				</div>
+				<div id="forgot_pw">
+					<div class="form-group">
+						<label>Please confirm login email below</label>
+						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
+						<i class="icon_mail_alt"></i>
+					</div>
+					<p>You will receive an email containing a link allowing you to reset your password to a new
+						preferred one.</p>
+					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+				</div>
+			</div>
+		</form>
+		<!--form -->
+	</div>
+	<!-- /Sign In Popup -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+
+	<!-- COMMON SCRIPTS -->
+	<script src="/js/common_scripts.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="phpmailer/validate.js"></script>
+	<script src="/js/input_qty.js"></script>
+	<!-- FlexSlider -->
+	<script defer src="/js/jquery.flexslider.js"></script>
+
+	<script src="ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+	<script src="bootstrap-slider/bootstrap-slider.min.js"></script>
+
+	<script>
+		$(window).on('load', function () {
+			'use strict';
+			$('#carousel_slider').flexslider({
+				animation: "slide",
+				controlNav: false,
+				animationLoop: false,
+				slideshow: false,
+				itemWidth: 280,
+				itemMargin: 25,
+				asNavFor: '#slider'
+			});
+			$('#slider').flexslider({
+				animation: "fade",
+				controlNav: false,
+				animationLoop: false,
+				slideshow: false,
+				sync: "#carousel_slider",
+				start: function (slider) {
+					$('body').removeClass('loading');
+				}
+			});
+		});
+	</script>
+	<script>
+		$(function () {
+			'use strict';
+			$('#start_date,#end_date').daterangepicker({
+				autoUpdateInput: false,
+				minDate: new Date(),
+				locale: {
+					cancelLabel: '초기화',
+					applyLabel: '적용'
+				},
+			}, function (start, end, label) {
+				$('#start_date').val(start);
+				$('#end_date').val(end);
+			});
+			$('#start_date,#end_date').on('apply.daterangepicker', function (ev, picker) {
+				$('#start_date').val(picker.startDate.format('YYYY-MM-DD'));
+				$('#end_date').val(picker.endDate.format('YYYY-MM-DD'));
+			});
+			$('#start_date,#end_date').on('cancel.daterangepicker', function (ev, picker) {
+				$('#start_date').val(picker.startDate.format('YYYY-MM-DD'));
+				$('#end_date').val(picker.endDate.format('YYYY-MM-DD'));
+			});
+		});
+		var slider = $('.slider').bootstrapSlider();
+		slider.on('change', function () {
+			var value = slider.bootstrapSlider('getValue');
+			$('#min_price').text(value[0]);
+			$('#max_price').text(value[1]);
+		});
+		$('.search-filter-rating').click(function () {
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+			} else {
+				$(this).addClass('active');
+			}
+		})
+		$('.search-filter-checkbox').click(function () {
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$(this).attr('src', 'img/check_off2.png');
+			} else {
+				$(this).addClass('active');
+				$(this).attr('src', 'img/check_on2.png');
+			}
+		})
+
+		$('.filter-btn').click(function () {
+			if ($(this).attr('src') == 'img/up.png') {
+				$('#' + $(this).data('target')).hide();
+				$(this).attr('src', 'img/down.png');
+			} else {
+				$('#' + $(this).data('target')).show();
+				$(this).attr('src', 'img/up.png');
+			}
+		})
+
+		$('.search-sort-text .sort').click(function () {
+			$('.search-sort-bottom div').removeClass('active');
+			$('#' + $(this).data('target')).addClass('active');
+		})
+	</script>
+
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script src="/js/map_single_hotel.js"></script>
+	<script src="/js/infobox.js"></script>
+</body>
+
+</html>
